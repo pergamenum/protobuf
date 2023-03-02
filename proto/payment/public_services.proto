@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package payment.public;
+
+import "proto/common/communication.proto";
+import "proto/payment/models.proto";
+
+option go_package = "github.com/pergamenum/protobuf/golang/payment";
+
+//////////////
+// CUSTOMER //
+//////////////
+service Customer {
+  rpc GetCustomer(GetCustomerRequest) returns (GetCustomerResponse);
+}
+
+message GetCustomerRequest {
+  string id = 1;
+}
+
+message GetCustomerResponse {
+  oneof result {
+    payment.Customer customer = 1;
+    common.Error error = 2;
+  }
+}
+
+///////////
+// ORDER //
+///////////
+service Order {
+  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse);
+}
+
+message GetOrderRequest {
+  string id = 1;
+}
+
+message GetOrderResponse {
+  oneof result {
+    payment.Order order = 1;
+    common.Error error = 2;
+  }
+}
