@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package shop.public;
+
+import "proto/common/communication.proto";
+import "proto/shop/models.proto";
+
+option go_package = "github.com/pergamenum/protobuf/golang/shop";
+
+service Customer {
+  rpc GetCustomer(GetCustomerRequest) returns (GetCustomerResponse);
+}
+
+message GetCustomerRequest {
+  string id = 1;
+}
+
+message GetCustomerResponse {
+  oneof result {
+    shop.Customer customer = 1;
+    common.Error error = 2;
+  }
+}
